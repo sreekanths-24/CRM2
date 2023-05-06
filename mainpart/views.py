@@ -17,10 +17,10 @@ def home(request):
         if user is not None:
             login(request, user)
             messages.success(request, "You have been logged in!")
-            return redirect('home')
+            return redirect('home_crm')
         else:
             messages.success(request, "Incorrect username or password, Please try again.")
-            return redirect('home')
+            return redirect('home_crm')
     else:
         return render(request, 'home.html', {'records':records})
 
@@ -30,7 +30,7 @@ def home(request):
 def logout_user(request):
     logout(request)
     messages.success(request, "You have been logged out..")
-    return redirect('home')
+    return redirect('home_crm')
 
 def register_user(request):
     if request.method == 'POST':
@@ -43,7 +43,7 @@ def register_user(request):
             user= authenticate(username=username, password=password)
             login(request, user)
             messages.success(request, "You have successfully registered! welcome!")
-            return redirect('home')
+            return redirect('home_crm')
     else:
         form = SignUpForm()
         return render(request, 'register.html', {'form':form})
@@ -58,17 +58,17 @@ def customer_record(request, pk):
         return render(request, 'records.html', {'customer_record':customer_record})
     else:
         messages.success(request, "You must log in to view that page.")
-        return redirect('home')
+        return redirect('home_crm')
 
 def delete_record(request, pk):
     if request.user.is_authenticated:    
         delete_it = Record.objects.get(id=pk)
         delete_it.delete()
         messages.success(request, "Record deleted successfully!!")
-        return redirect('home')
+        return redirect('home_crm')
     else:
         messages.success(request, "You must log in to do that.")
-        return redirect('home')
+        return redirect('home_crm')
     
 def add_record(request):
     form = AddRecordForm(request.POST or None)
@@ -77,11 +77,11 @@ def add_record(request):
             if form.is_valid():
                 add_record = form.save()
                 messages.success(request, "New record added successfully!!")
-                return redirect('home')
+                return redirect('home_crm')
         return render(request, 'add_record.html', {'form':form})
     else:
         messages.success(request, "You must be logged in to add new records.")
-        return redirect('home')
+        return redirect('home_crm')
 
 def update_record(request, pk):
     if request.user.is_authenticated:    
@@ -90,8 +90,8 @@ def update_record(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Record updated successfully!!")
-            return redirect('home')
+            return redirect('home_crm')
         return render(request, 'update_record.html', {'form':form})
     else:
         messages.success(request, "You must be logged in to update records.")
-        return redirect('home')
+        return redirect('home_crm')

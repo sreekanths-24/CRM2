@@ -34,9 +34,9 @@
       <h5 class="card-title">
         CREATED AT - {{ customer_record.created_at }}
       </h5>
-      <a href="{% url 'home' %}" class="btn btn-secondary">Back</a>
+      <a href="{% url 'home_crm' %}" class="btn btn-secondary">Back</a>
       <a href="{% url 'delete_record' customer_record.id %}" class="btn btn-danger">Delete</a>
-      <a href="{% url 'update_record' customer_record.id %}" class="btn btn-success">Update Record</a>
+      <a href="{% url 'update_record_crm' customer_record.id %}" class="btn btn-success">Update Record</a>
     </div>
   </div>
 

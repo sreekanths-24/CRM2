@@ -27,7 +27,7 @@
 		
 		{% for record in records %}
 		<tr>
-			<td><a href="{% url 'record' record.id %}">{{ record.id }}</a></td>
+			<td><a href="{% url 'record_crm' record.id %}">{{ record.id }}</a></td>
 			<td>{{ record.first_name }}
 			{{ record.last_name }}</td>
 			<td>{{ record.email }}</td>
@@ -52,7 +52,7 @@
 
 <h1>Login</h1>
 <br/>
-<form method="POST" action="{% url 'home' %}">
+<form method="POST" action="{% url 'home_crm' %}">
 	{% csrf_token %}
 	
 	<div class="mb-3">
