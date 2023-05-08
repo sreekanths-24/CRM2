@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainpart',
-    'products',
-    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -82,13 +80,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'elderco',
         'USER': 'root',
-        'PASSWORD': 'my$ql123',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306'
     }
 }
 
-
+#my$ql123
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -141,9 +139,9 @@ MEDIA_URL = '/media/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_USE_TLS = True
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'askandsreekanthanswer@gmail.com'
-EMAIL_HOST_PASSWORD = 'buwoxwwggijvgljf'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_USE_TLS = True
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = 'askandsreekanthanswer@gmail.com'
+# EMAIL_HOST_PASSWORD = ''
