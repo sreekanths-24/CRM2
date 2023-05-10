@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainpart',
+    'store'
 ]
 
 MIDDLEWARE = [
@@ -80,13 +81,13 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'elderco',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'my$ql123',
         'HOST': 'localhost',
         'PORT': '3306'
     }
 }
 
-#my$ql123
+#
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
@@ -125,14 +126,14 @@ STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR,'static/images')
 
 STATICFILES_DIR = {
-    os.path.join(BASE_DIR , "public/static")
+    os.path.join(BASE_DIR , "static")
 }
 
-MEDIA_ROOT =  os.path.join(BASE_DIR, 'public/static') 
-MEDIA_URL = '/media/'
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'static') 
+MEDIA_URL = '/images/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
