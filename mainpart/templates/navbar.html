@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="baiehfbw">
   <div class="container-fluid">
     <a class="navbar-brand" href="{% url 'home_crm' %}">CRM</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,6 +10,15 @@
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add_record_crm' %}">Add Record</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Ecomm Data</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'viewfeedback' %}">See Feedbacks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://127.0.0.1:8000/admin/">Dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout_crm' %}">Logout</a>
@@ -26,6 +35,7 @@
         
         {% endif %}
       </ul>
+
       <!-- <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
