@@ -3,5 +3,6 @@ from . import views
 
 urlpatterns = [
     path('', views.sendfeedback, name='sendfeedback'),
-    path('ViewFeedbacks', views.viewfeedback, name='viewfeedback')
+    path('ViewFeedbacks', views.viewfeedback, name='viewfeedback'),
+    path('searchdata', views.searchdata, name='searchdata')
 ]
