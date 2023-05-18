@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 import json
 import datetime
@@ -90,3 +90,21 @@ def processOrder(request):
 		)
 
 	return JsonResponse('Payment submitted..', safe=False)
+
+def addnewshppingaddress(request):
+	if request.method == "POST":
+		name = request.POST["buyername"]
+		phone = request.POST["Phonenumber"]
+		address = request.POST["address"]
+		email = request.POST["buyeremail"]
+		city = request.POST["city"]
+		state = request.POST["state"]
+		zipcode = request.POST["zipcode"]
+		country = request.POST["country"]
+
+		obj = NewShippingAdress(name=name, phone=phone, address=address, email=email, city=city, state=state, zipcode=zipcode, country=country)
+
+		print(f'name = {name}, phone = {phone}, address={address}, email={email}, city={city}, state={state}, zipcode={zipcode}, country={country}')
+		obj.save()
+		return redirect('checkout')
+	return render(request, 'store/shipping.html', {})

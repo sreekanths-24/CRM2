@@ -9,7 +9,7 @@ def sendfeedback(request):
 		name = request.POST["yourname"]
 		email = request.POST["youremail"]
 		feedback = request.POST["userfeedbacktake"]
-		print(f'name = {name} email = {email} feedback = {feedback}')
+		#print(f'name = {name} email = {email} feedback = {feedback}')
 		obj = FeedbackTable(name=name, email=email, feedback=feedback)
 		obj.save()
 		messages.success(request, "feedback submitted sucessfully")
