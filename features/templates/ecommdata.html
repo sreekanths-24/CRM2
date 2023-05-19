@@ -3,9 +3,10 @@
 {% if user.is_authenticated %}
 <!-- <h1> Records </h1> -->
 <div class="table-resp">
-<table class="table table-striped table-hover table-bordered ">
+<table class="table table-striped table-hover table-bordered">
 	<thead class="table-dark">
 		<tr>
+			<th scope="col">Shipping Id</th>
 			<th scope="col">Name</th>
 			<th scope="col">Email</th>
 			<th scope="col">Phone</th>
@@ -20,7 +21,8 @@
 		{% if ecommshippingdata %}
 		
 		{% for record in ecommshippingdata %}
-		<tr>
+		
+			<td>{{ forloop.counter }}</td>
 			<td>{{ record.name }}</td>
 			<td>{{ record.email }}</td>
 			<td>{{ record.phone }}</td>
@@ -35,7 +37,8 @@
 		{% endif %}
 
 	</tbody>
-</table>	  
+</table>	
+
 </div>
 
 {% else %}

@@ -7,4 +7,5 @@ urlpatterns = [
     path('searchdata', views.searchdata, name='searchdata'),
     path('ecommdata', views.ecommdata, name='ecommdata'),
     path('ecommorderdata', views.ecommorderdata, name='ecommorderdata'),
+    path('ordertoid', views.ordertoid, name='ordertoid'),
 ]
