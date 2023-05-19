@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+<!-- <h1> Records </h1> -->
+<div class="table-resp">
+<table class="table table-striped table-hover table-bordered ">
+	<thead class="table-dark">
+		<tr>
+			<!-- <th scope="col">Order Number</th> -->
+			<th scope="col">Order Id</th>
+			<th scope="col">Product</th>
+			<th scope="col">Quantity</th>
+			<th scope="col">Time of purchace</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% if ecommorders %}
+		
+		{% for items in ecommorders %}
+		<tr>
+			<td>{{ items.order }}</td>
+			<td>{{ items.product }}</td>
+			<td>{{ items.quantity }}</td>
+			<td>{{ items.date_added }}</td>
+		</tr>
+		{% endfor %}
+
+		{% endif %}
+
+	</tbody>
+</table>	  
+</div>
+
+{% else %}
+<h1>You need to login first</h1>
+
+{% endif %} 
+
+
+{% endblock %}

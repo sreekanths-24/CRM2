@@ -11,8 +11,26 @@
         <li class="nav-item">
           <a class="nav-link" href="{% url 'add_record_crm' %}">Add Record</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Ecomm Data</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Shop Data
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'ecommdata' %}">Shipping address</a></li>
+            <li><a class="dropdown-item" href="{% url 'ecommorderdata' %}">Shop orders</a></li>
+            <!-- <li><hr class="dropdown-divider"></li> -->
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Suppliers
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">View Suppliers</a></li>
+            <li><a class="dropdown-item" href="#">Add Suppliers</a></li>
+            
+            <!-- <li><hr class="dropdown-divider"></li> -->
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'viewfeedback' %}">See Feedbacks</a>

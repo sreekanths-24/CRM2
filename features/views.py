@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import FeedbackTable
 from django.contrib import messages
 from mainpart.models import Record
+from store.models import NewShippingAdress, OrderItem
 from django.db.models import Q
 # Create your views here.
 def sendfeedback(request):
@@ -29,3 +30,11 @@ def searchdata(request):
 		return render(request, 'searchdata.html', {'searcheddata':searcheddata, 'recordresults':recordresults})
 	else:
 		return render(request, 'searchdata.html', {})
+	
+def ecommdata(request):
+	ecommshippingdata = NewShippingAdress.objects.order_by('-date_added')
+	return render(request, 'ecommdata.html', {'ecommshippingdata':ecommshippingdata})
+
+def ecommorderdata(request):
+	ecommorders = OrderItem.objects.order_by('-date_added')
+	return render(request, 'ecommorder.html', {'ecommorders':ecommorders})
