@@ -2,39 +2,44 @@
 {% load static %}
 {% block content %}
      <div class="row">
+		
 		<div class="col-lg-6">
 			<div class="box-element" id="form-wrapper">
 				<form id="form">
+					{% csrf_token %}
 					<div id="user-info">
-						<!-- <div class="form-field">
+						<div class="form-field">
 							<input required class="form-control" type="text" name="name" placeholder="Name..">
 						</div>
 						<div class="form-field">
 							<input required class="form-control" type="email" name="email" placeholder="Email..">
-						</div> -->
+						</div>
 					</div>
 					
-					<div id="shipping-info" style="visibility: hidden;">
-
+					<div id="shipping-info">
+						<hr>
+						<p>Shipping Information:</p>
+						<hr>
 						<div class="form-field">
-							<input class="form-control" type="text" name="address">
+							<input class="form-control" required type="text" name="address" placeholder="Address..">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="city" >
+							<input class="form-control" required type="text" name="city" placeholder="City..">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="state" >
+							<input class="form-control" required type="text" name="state" placeholder="State..">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="zipcode" >
+							<input class="form-control" required type="number" name="zipcode" placeholder="Zip code..">
 						</div>
 						<div class="form-field">
-							<input class="form-control" type="text" name="country" >
+							<input class="form-control" required type="text" name="country" placeholder="Country">
+						</div>
+						<div class="form-field">
+							<input class="form-control" required type="number" name="phone" placeholder="Phone">
 						</div>
 					</div>
 
-					<hr>
-					<a href="{% url 'addnewshppingaddress' %}" class="btn btn-secondary" style="width: 100%;">Add shipping address</a>
 					<hr>
 					<input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
 				</form>
@@ -42,13 +47,17 @@
 
 			<br>
 			<div class="box-element hidden" id="payment-info">
-				<button id="make-payment">Cash On Delivery</button>
-				<div id="paypal-button-container">
-
-				</div>
+				<small>Payment Options</small>
+				<br>
+				<button class="btn btn-secondary my-2 w-100" id="make-payment">Cash On Delivery</button>
+				<a href="#" class="my-2 w-100 btn btn-success">Credit Card</a>
+				<a href="#" class="my-2 w-100 btn btn-info">Debit Card</a>
+				<a href="#" class="my-2 w-100 btn btn-warning">UPI</a>
+				<div id="paypal-button-container"></div>
 			</div>
 			
 		</div>
+
 
 		<div class="col-lg-6">
 			<div class="box-element">
@@ -68,10 +77,16 @@
 				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
 			</div>
 		</div>
+		
+		<div class="col-lg-6">
+			<div class="box-element">
+				<p>Thank You for your purchace, dont forget to take a screenshot of Your order summary before submitting the shipping address form, And dont forget to send us your feedback about your experience.</p>
+			</div>
+		</div>
 	</div>
 
 	<script src="https://www.paypal.com/sdk/js?client-id=YOUR-CLIENT-ID&currency=USD&disable-funding=credit"></script>
-
+<!-- 
 	<script>
 		var total = '{{order.get_cart_total}}'
         // Render the PayPal button into #paypal-button-container
@@ -102,7 +117,7 @@
             }
 
         }).render('#paypal-button-container');
-    </script>
+    </script> -->
 
 	<script type="text/javascript">
 		var shipping = '{{order.shipping}}'
@@ -142,7 +157,7 @@
 	    	var userFormData = {
 				'name':null,
 				'email':null,
-				'total':total,
+				'total':'{{order.get_cart_total|floatformat:2}}',
 			}
 
 			var shippingInfo = {
@@ -150,6 +165,8 @@
 				'city':null,
 				'state':null,
 				'zipcode':null,
+				'country':null,
+				'phone':null,
 			}
 
 			if (shipping != 'False'){
@@ -157,6 +174,8 @@
 		    	shippingInfo.city = form.city.value
 		    	shippingInfo.state = form.state.value
 		    	shippingInfo.zipcode = form.zipcode.value
+		    	shippingInfo.country = form.country.value
+		    	shippingInfo.phone = form.phone.value
 	    	}
 
 	    	if (user == 'AnonymousUser'){
@@ -180,7 +199,7 @@
 	    	.then((response) => response.json())
 	    	.then((data) => {
 				console.log('Success:', data);
-				alert('Transaction completed');  
+				alert('Your Order Has Been Placed');  
 
 				cart = {}
 				document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"

@@ -1,9 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import JsonResponse
 import json
 import datetime
 from .models import * 
 from .utils import cookieCart, cartData, guestOrder
+from django.db.models import Q
+
 
 def store(request):
 	data = cartData(request)
@@ -12,8 +14,15 @@ def store(request):
 	order = data['order']
 	items = data['items']
 
-	products = Product.objects.all()
-	context = {'products':products, 'cartItems':cartItems}
+	if 'qp' in request.GET:
+		qp = request.GET['qp']
+		products = Product.objects.filter(Q(name__icontains=qp) | Q(description__icontains=qp))
+	else:
+		products = Product.objects.all()
+	context = {
+		'products':products, 
+		'cartItems':cartItems
+	}
 	return render(request, 'store/store.html', context)
 
 
@@ -87,24 +96,30 @@ def processOrder(request):
 		city=data['shipping']['city'],
 		state=data['shipping']['state'],
 		zipcode=data['shipping']['zipcode'],
+		country=data['shipping']['country'],
+		phone=data['shipping']['phone'],
 		)
 
-	return JsonResponse('Payment submitted..', safe=False)
+	return JsonResponse('Order submitted..', safe=False)
 
-def addnewshppingaddress(request):
-	if request.method == "POST":
-		name = request.POST["buyername"]
-		phone = request.POST["Phonenumber"]
-		address = request.POST["address"]
-		email = request.POST["buyeremail"]
-		city = request.POST["city"]
-		state = request.POST["state"]
-		zipcode = request.POST["zipcode"]
-		country = request.POST["country"]
+def previous_order(request):
+    if 'q1' in request.GET:
+        q1 = request.GET['q1']
+        emailid = OrderItem.objects.filter(order__customer__email__icontains=q1)
+        return render(request, 'store/previous_purchase.html', {'emailid': emailid, 'q1':q1})
+    else:
+        return render(request, 'store/previous_purchase.html')
 
-		obj = NewShippingAdress(name=name, phone=phone, address=address, email=email, city=city, state=state, zipcode=zipcode, country=country)
 
-		print(f'name = {name}, phone = {phone}, address={address}, email={email}, city={city}, state={state}, zipcode={zipcode}, country={country}')
-		obj.save()
-		return redirect('checkout')
-	return render(request, 'store/shipping.html', {})
+# def previous_order(request):
+# 	if 'q1' in request.GET:
+# 		q1 = request.GET['q1']
+# 		multiq= Q(Q(customer__email__icontains=q1))
+# 		emailid = ShippingAddress.objects.filter(multiq)
+# 		return render(request, 'store/previous_purchase.html', {'emailid':emailid})
+# 	elif 'q2' in request.GET:
+# 		q2 = request.GET['q2']
+# 		orderid = OrderItem.objects.filter(order__id__icontains=q2)
+# 		return render(request, 'store/previous_purchase.html', {'orderid':orderid})
+# 	else:
+# 		return render(request, 'store/previous_purchase.html')

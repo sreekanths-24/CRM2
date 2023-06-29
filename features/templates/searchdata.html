@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if user.is_authenticated %}
 
 {% if searcheddata %}
-<h1 id="gjkaegryuw">Search results for "{{ searcheddata }}"</h1>
+<h4 id="gjkaegryuw">Search results for "{{ searcheddata }}"</h4>
 
 <!-- <h1> Records </h1> -->
 <div class="table-resp">
@@ -42,13 +43,18 @@
 
 
 	</tbody>
-</table>	  
+</table>
+<a href="{% url 'home_crm' %}" class="btn btn-secondary">Back</a>
+
 </div>
 
 {% else %}
 <h1>Click on the search bar above and search for something!!</h1>
 {% endif %}
 
+{% else %}
+<h1>Log In first to search data</h1>
+{% endif %}
 
 
 {% endblock %}

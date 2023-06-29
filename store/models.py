@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Customer(models.Model):
-	id = models.IntegerField(primary_key=True)
 	user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
 	name = models.CharField(max_length=200, null=True)
 	email = models.CharField(max_length=200)
@@ -15,6 +14,7 @@ class Customer(models.Model):
 
 class Product(models.Model):
 	name = models.CharField(max_length=200)
+	description = models.CharField(max_length=200)
 	price = models.FloatField()
 	digital = models.BooleanField(default=False,null=True, blank=True)
 	image = models.ImageField(null=True, blank=True)
@@ -78,22 +78,9 @@ class ShippingAddress(models.Model):
 	city = models.CharField(max_length=200, null=False)
 	state = models.CharField(max_length=200, null=False)
 	zipcode = models.CharField(max_length=200, null=False)
+	country = models.CharField(max_length=200, null=False)
+	phone = models.CharField(max_length=200, null=False)
 	date_added = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.address
-	
-class NewShippingAdress(models.Model):
-	name = models.CharField(max_length=100)
-	phone = models.CharField(max_length=15, null=True)
-	address = models.CharField(max_length=200, null=False)
-	email = models.EmailField(null=True)
-	city = models.CharField(max_length=200, null=False)
-	state = models.CharField(max_length=200, null=False)
-	zipcode = models.CharField(max_length=200, null=False)
-	country = models.CharField(max_length=100, null=True)
-	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
-	date_added = models.DateTimeField(auto_now_add=True)
-
-	def __str__(self):
-		return self.name

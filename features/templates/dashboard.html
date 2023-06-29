@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if user.is_authenticated %}
+
+<div class="row" id="ajshgf" style="margin: 0 auto;">
+
+    <h1 class="mb-5">Products Purchase Graph</h1>
+    <br><br>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+      
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      
+      <script>
+        const ctx = document.getElementById('myChart');
+      
+        new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+            labels: {{product_names|safe}} ,
+            datasets: [{
+              label: 'Total Purchases',
+              data: {{product_totals|safe}},
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+      
+      
+</div>
+<br>
+<h1 style="text-align: center;">Dashboard</h1>
+<br>
+<div style="text-align: center;" class="row gap-2">
+    <div class="col-lg-3 col-md-1 mx-auto my-3 box-element">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+
+                    Total Customers
+                </h3>
+            </div>
+            <div class="card-body">
+              <h4 class="card-text">
+                {% if totalcustomers %}
+                {% for item in totalcustomers %}
+                {% if forloop.last %}
+                    {{ forloop.counter }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}</h4>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-3 col-md-1 mx-auto my-3 box-element">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+
+                    Total Suppliers
+                </h3>
+            </div>
+            <div class="card-body">
+              <h4 class="card-text">
+                {% if totalsuppliers %}
+                {% for item in totalsuppliers %}
+                {% if forloop.last %}
+                    {{ forloop.counter }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-1 mx-auto my-3 box-element">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+
+                    Total Products
+                </h3>
+            </div>
+            <div class="card-body">
+              <h4 class="card-text">
+                {% if totalproducts %}
+                {% for item in totalproducts %}
+                {% if forloop.last %}
+                    {{ forloop.counter }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}</h4>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-3 col-md-1 mx-auto my-3 box-element">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+
+                    Total Sales Order
+                </h3>
+            </div>
+            <div class="card-body">
+              <h4 class="card-text">
+                {% if totalcustomers %}
+                {% for item in totalcustomers %}
+                {% if forloop.last %}
+                    {{ forloop.counter }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}</h4>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-3 col-md-1 mx-auto my-3 box-element">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+
+                    Total Feedbacks
+                </h3>
+            </div>
+            <div class="card-body">
+              <h4 class="card-text">
+                {% if totalfeedbacks %}
+                {% for item in totalfeedbacks %}
+                {% if forloop.last %}
+                    {{ forloop.counter }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}</h4>
+            </div>
+        </div>
+    </div>
+   
+    <div class="col-lg-3 col-md-1 box-element mx-auto my-3">
+        <div class="card">
+            <div class="card-header">
+                <h3>
+                    Total Deliveries
+                </h3>
+            </div>
+            <div class="card-body">
+              <h4 class="card-text">
+                {% if alldeliveries %}
+                {% for item in alldeliveries %}
+                {% if forloop.last %}
+                    {{ forloop.counter }}
+                {% endif %}
+                {% endfor %}
+                {% endif %}</h4>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<br><br><br>
+{% endif %} 
+
+
+{% endblock %}

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="baiehfbw">
   <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home_crm' %}">CRM</a>
+    <a class="navbar-brand" href="{% url 'dashboard' %}">CRM</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,16 +8,26 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         
         {% if user.is_authenticated %}
+        
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'add_record_crm' %}">Add Record</a>
+          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Shop Data
+            Main
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'home_crm' %}">Manual Records</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_record_crm' %}">Add Record</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Sales
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="{% url 'ecommdata' %}">Shipping address</a></li>
-            <li><a class="dropdown-item" href="{% url 'ordertoid' %}">Order to Id</a></li>
             <li><a class="dropdown-item" href="{% url 'ecommorderdata' %}">Shop orders</a></li>
             <!-- <li><hr class="dropdown-divider"></li> -->
           </ul>
@@ -27,27 +37,28 @@
             Suppliers
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">View Suppliers</a></li>
-            <li><a class="dropdown-item" href="#">Add Suppliers</a></li>
-            
-            <!-- <li><hr class="dropdown-divider"></li> -->
+            <li><a class="dropdown-item" href="{% url 'supplierrecords' %}">View Suppliers</a></li>
+            <li><a class="dropdown-item" href="{% url 'add_supplier_record' %}">Add Suppliers</a></li>
           </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'viewfeedback' %}">See Feedbacks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://127.0.0.1:8000/admin/">Dashboard</a>
+          <a class="nav-link" href="{% url 'confirmdelivery' %}">Confirm Delivery</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="http://127.0.0.1:8000/admin/">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'register_crm' %}">Register</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'logout_crm' %}">Logout</a>
         </li>
 
         {% else %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'register_crm' %}">Register</a>
-        </li>
-        
+
         <li class="nav-item">
           <a class="nav-link" href="{% url 'home_crm' %}">Login</a>
         </li>
@@ -55,12 +66,6 @@
         {% endif %}
       </ul>
 
-      <form class="d-flex" role="search" method="POST" action="{% url 'searchdata' %}">
-        {% csrf_token %}
-
-        <input class="form-control me-2" type="search" placeholder="Search Records" aria-label="Search" name="searcheddata">
-        <button class="btn btn-outline-secondary" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>

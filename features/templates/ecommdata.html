@@ -1,19 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
 {% if user.is_authenticated %}
-<!-- <h1> Records </h1> -->
+<h1> Shipping Address </h1>
+<br>
+<div class="bg-dark p-2">
+	
+	<form class="d-flex" role="search" method="POST" action="{% url 'searchorder' %}">
+        {% csrf_token %}
+
+        <input class="form-control me-2" type="search" placeholder="Search Shipping Address" aria-label="Search" name="searchedorder">
+        <button class="btn btn-secondary" type="submit">Search</button>
+      </form>
+</div>
+<br>
 <div class="table-resp">
 <table class="table table-striped table-hover table-bordered">
 	<thead class="table-dark">
 		<tr>
-			<th scope="col">Shipping Id</th>
+			<th scope="col">Order Id</th>
 			<th scope="col">Name</th>
 			<th scope="col">Email</th>
-			<th scope="col">Phone</th>
 			<th scope="col">Address</th>
 			<th scope="col">City</th>
 			<th scope="col">State</th>
 			<th scope="col">Zipcode</th>
+			<th scope="col">Country</th>
+			<th scope="col">Phone</th>
 			<th scope="col">Created Time</th>
 		</tr>
 	</thead>
@@ -21,16 +33,30 @@
 		{% if ecommshippingdata %}
 		
 		{% for record in ecommshippingdata %}
-		
-			<td>{{ forloop.counter }}</td>
-			<td>{{ record.name }}</td>
-			<td>{{ record.email }}</td>
-			<td>{{ record.phone }}</td>
+		<tr>
+			{% if record.order.id in order_id_list %}
+			<td class="bg-secondary" style="color: white;">{{ record.order.id }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.customer.name }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.customer.email }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.address }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.city }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.state }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.zipcode }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.country }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.phone }}</td>
+			<td class="bg-secondary" style="color: white;">{{ record.date_added }}</td>
+			{% else %}
+			<td>{{ record.order.id }}</td>
+			<td>{{ record.customer.name }}</td>
+			<td>{{ record.customer.email }}</td>
 			<td>{{ record.address }}</td>
 			<td>{{ record.city }}</td>
 			<td>{{ record.state }}</td>
 			<td>{{ record.zipcode }}</td>
+			<td>{{ record.country }}</td>
+			<td>{{ record.phone }}</td>
 			<td>{{ record.date_added }}</td>
+			{% endif %}
 		</tr>
 		{% endfor %}
 
@@ -40,7 +66,7 @@
 </table>	
 
 </div>
-
+<br><br>
 {% else %}
 <h1>You need to login first</h1>
 

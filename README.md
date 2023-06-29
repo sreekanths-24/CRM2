@@ -26,7 +26,7 @@ Customer Relationship Management (CRM) system is a software solution designed to
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
 ### Database
-![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 
 ### Text Editor
 ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white)
@@ -98,14 +98,22 @@ https://github.com/sreekanths-24/crm-fcc
 
 on the top right side you will see the 'fork' button, click it and give your forked repository a name.
 
-**4. Clone this project**
+**4. install required libraries**
 ```
-$  git clone https://github.com/Your-username-here/crm-fcc.git
+$ python -m pip install django 
+```
+```
+$ python -m pip install Pillow 
+```
+
+**5. Clone this project**
+```
+$  git clone https://github.com/Your-username-here/CRM.git
 ```
 
 Then, Enter the project
 ```
-$  cd crm-fcc
+$  cd CRM
 ```
 
 ---
@@ -125,7 +133,7 @@ $  git commit -am "short description of your changes"
 ```
 - Push your changes 
 ```
-$  git push origin main
+$  git push origin master
 ```
 
 ---
